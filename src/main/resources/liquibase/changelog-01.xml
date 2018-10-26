@@ -6,13 +6,73 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="tungmai" id="1539880500-1">
+    <changeSet author="tungmai" id="1539880500-1" context="create">
         <createTable tableName="song">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
         </createTable>
+    </changeSet>
+
+    <changeSet author="tungmai" id="1539880500-2" context="create">
+        <createTable tableName="artist">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="tungmai" id="1539880500-3" context="create">
+        <createTable tableName="playlist">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="tungmai" id="1539880500-4" context="create">
+        <createTable tableName="song_playlist">
+            <column name="playlist_id" type="BIGINT"/>
+            <column name="song_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="tungmai" id="1539880500-5" context="create">
+        <createTable tableName="song_artist">
+            <column name="artist_id" type="BIGINT"/>
+            <column name="song_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="tungmai" id="1539880500-6" context="relationship">
+        <addForeignKeyConstraint baseColumnNames="playlist_id"
+                                 baseTableName="song_playlist"
+                                 constraintName="FK_4c9dc75af956792340d96c8c6"
+                                 referencedColumnNames="id"
+                                 referencedTableName="playlist"/>
+
+        <addForeignKeyConstraint baseColumnNames="song_id"
+                                 baseTableName="song_playlist"
+                                 constraintName="FK_4c9dc75af956792340d96c32r"
+                                 referencedColumnNames="id"
+                                 referencedTableName="song"/>
+    </changeSet>
+
+    <changeSet author="tungmai" id="1539880500-7" context="relationship">
+        <addForeignKeyConstraint baseColumnNames="artist_id"
+                                 baseTableName="song_artist"
+                                 constraintName="FK_4c9dc75af956792340d96236"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="song_id"
+                                 baseTableName="song_artist"
+                                 constraintName="FK_4c9dc75af956792340d9f432r"
+                                 referencedColumnNames="id"
+                                 referencedTableName="song"/>
     </changeSet>
 
 </databaseChangeLog>
