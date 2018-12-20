@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MusicPlayerApplication {
 
 	public static void main(String[] args) {
+		int variable = 5;
 		SpringApplication.run(MusicPlayerApplication.class, args);
 	}
 }
